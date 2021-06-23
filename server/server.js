@@ -1,13 +1,35 @@
 require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
-app.get("/getBatata",(req,res) => {
-    res.json({
+app.use(express.json());
+
+app.get("/api/v1/restaurants",(req,res) => {
+    res.status(200).json({
         status: "success",
-        restaurant:"mcdonalds"
-    })
+        data:{
+        restaurant:["mcdonalds","zaza"]
+    }})
+});
+
+app.get("/api/v1/restaurants/:restaurantid",(req,res) => {
+  console.log(req.params);
+});
+
+app.post("/api/v1/restaurants", (req,res) => {
+console.log(req.body);
+});
+
+app.put("/api/v1/restaurants/:restaurantid", (req,res) => {
+    console.log(req.params.restaurantid);
+});
+
+app.delete("/api/v1/restaurants/:resataurantsid",(req,res) => {
+    res.status(204).json({
+        status:"sucess",
+    });
 });
 
 const port = process.env.port || 4001;
