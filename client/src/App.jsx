@@ -1,11 +1,12 @@
 import React from 'react'
-import {BrowserRouter as Router,Switch, Route} from "react-router-dom"
+import {BrowserRouter as Router,Route} from "react-router-dom"
 import Home from './Routes/Home'
 import RestauratnDetailPage from './Routes/RestauratnDetailPage'
 import Update from './Routes/Update'
+import { RestaurantsContextProvider } from './Context/RestaurantsContext'
 
 const App = () => {
-    return <div>
+    return <RestaurantsContextProvider> <div>
       
         <Router>
         <Route exact path  ="/" component={Home}/>
@@ -14,5 +15,6 @@ const App = () => {
         </Router>
      
         </div>
+        </RestaurantsContextProvider>
 }
 export default App;

@@ -1,6 +1,15 @@
-import React from 'react'
-
+import React, {useEffect} from 'react'
+import RestaurantAPI from '../Api/RestaurantAPI'
 const RestaurantList = () => {
+useEffect(async () => {
+try {
+    const respone = await RestaurantAPI.get("/")
+    console.log(respone)
+} catch (error) {
+    console.log(error)
+}
+},[])
+ 
     return (
         <div className="">
          <table class="table table-hover  table-dark">
