@@ -2,7 +2,7 @@ import React from "react";
 
 const AddRestaurant = () => {
   return (
-    <div className="mb-4 text-center">
+    <div className="container mb-4">
       <form action="">
         <div className="row center"> 
           <div className="col">
@@ -12,7 +12,7 @@ const AddRestaurant = () => {
             <input className="form-control" type="text" placeholder="location" />
           </div>
           <div className="col">
-            <select className="custom-select my-1 mr-sm-2">
+            <select className="form-select my-1 mr-sm-2">
               <option disabled>Price Range</option>
               <option value="1">$</option>
               <option value="2">$$</option>
