@@ -4,6 +4,18 @@ import { useContext } from 'react'
 import { RestaurantsContext } from '../Context/RestaurantsContext'
 const RestaurantList = (props) => {
     const {restaurants,setRestaurants} = useContext(RestaurantsContext)
+    const handleDelete = async (id) => {
+        try {
+            const response = await RestaurantAPI.delete(`/${id}`)
+            console.log(response)
+            setRestaurants(restaurants.filter(restaurant => {
+                return restaurant.id !==id
+            }))
+        } catch (error) {
+            console.log(error)
+        }
+    
+    }
 useEffect( () => {
     const fetchData = async () => {
 try {
@@ -35,7 +47,7 @@ fetchData();
               <td>{"$".repeat(elem.price_range)}</td>
               <td>Reviews</td>
               <td><button className="btn btn-warning">Edit</button></td>
-              <td><button className="btn btn-danger">Delete</button></td>
+              <td><button onClick={()=>handleDelete(elem.id)} className="btn btn-danger">Delete</button></td>
           </tr>);
       })} 
     </tbody>
