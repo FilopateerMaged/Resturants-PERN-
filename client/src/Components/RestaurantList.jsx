@@ -2,9 +2,15 @@ import React, {useEffect} from 'react'
 import RestaurantAPI from '../Api/RestaurantAPI'
 import { useContext } from 'react'
 import { RestaurantsContext } from '../Context/RestaurantsContext'
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 const RestaurantList = (props) => {
+    let history = useHistory()
     const {restaurants,setRestaurants} = useContext(RestaurantsContext)
+   
+    const handlePress = (id) => {
+        history.push(`/restaurants/${id}/update`)
+            }
+
     const handleDelete = async (id) => {
         try {
             const response = await RestaurantAPI.delete(`/${id}`)
@@ -15,7 +21,7 @@ const RestaurantList = (props) => {
         } catch (error) {
             console.log(error)
         }
-    
+   
     }
 useEffect( () => {
     const fetchData = async () => {
@@ -47,7 +53,7 @@ fetchData();
               <td>{elem.location}</td>
               <td>{"$".repeat(elem.price_range)}</td>
               <td>Reviews</td>
-              <td><a href="http://localhost:3000/restaurants/${elem.id}/update" className="btn btn-warning">Edit</a></td>
+              <td><button onClick={()=> handlePress(elem.id)} className="btn btn-warning">Edit</button></td>
               <td><button onClick={()=>handleDelete(elem.id)} className="btn btn-danger">Delete</button></td>
           </tr>);
       })} 
