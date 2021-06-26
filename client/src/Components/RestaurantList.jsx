@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import RestaurantAPI from '../Api/RestaurantAPI'
 import { useContext } from 'react'
 import { RestaurantsContext } from '../Context/RestaurantsContext'
+import {Link} from "react-router-dom";
 const RestaurantList = (props) => {
     const {restaurants,setRestaurants} = useContext(RestaurantsContext)
     const handleDelete = async (id) => {
@@ -46,7 +47,7 @@ fetchData();
               <td>{elem.location}</td>
               <td>{"$".repeat(elem.price_range)}</td>
               <td>Reviews</td>
-              <td><button className="btn btn-warning">Edit</button></td>
+              <td><a href="http://localhost:3000/restaurants/${elem.id}/update" className="btn btn-warning">Edit</a></td>
               <td><button onClick={()=>handleDelete(elem.id)} className="btn btn-danger">Delete</button></td>
           </tr>);
       })} 
