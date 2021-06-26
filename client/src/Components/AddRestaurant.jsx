@@ -1,6 +1,8 @@
-import React , {useState} from "react";
+import React , {useState,useContext} from "react";
 import RestaurantAPI from "../Api/RestaurantAPI";
+import { RestaurantsContext } from "../Context/RestaurantsContext";
 const AddRestaurant = () => {
+  const {addRestaurants} = useContext(RestaurantsContext)
   const [name, setname] = useState("");
   const [location, setlocation] = useState("");
   const [priceRange, setpriceRange] = useState("");
@@ -12,6 +14,7 @@ const response = await RestaurantAPI.post("/",{
   location:location,
   price_range:priceRange
 })
+addRestaurants(response.data.data.restaurant)
 console.log(response);
     }
     catch(err){
