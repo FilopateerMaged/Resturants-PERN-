@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react'
 import RestaurantAPI from '../Api/RestaurantAPI'
 const RestaurantList = () => {
-useEffect(async () => {
+useEffect( () => {
+    const fetchData = async () => {
 try {
     const respone = await RestaurantAPI.get("/")
-    console.log(respone)
-} catch (error) {
-    console.log(error)
-}
+    console.log(respone.data.data)
+} catch (error) {}}
+fetchData();
 },[])
  
     return (
         <div className="">
-         <table class="table table-hover  table-dark">
+         <table className="table table-hover  table-dark">
   <thead>
     <tr className="table-success">
       <th scope="col">Restaurant</th>
