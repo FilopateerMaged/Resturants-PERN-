@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react'
 import RestaurantAPI from '../Api/RestaurantAPI'
-const RestaurantList = () => {
+import { useContext } from 'react'
+import { RestaurantsContext } from '../Context/RestaurantsContext'
+const RestaurantList = (props) => {
+    const {restaurants,setRestaurants} = useContext(RestaurantsContext)
 useEffect( () => {
     const fetchData = async () => {
 try {
     const respone = await RestaurantAPI.get("/")
-    console.log(respone.data.data)
+    setRestaurants(respone.data.data.restaurant)
 } catch (error) {}}
 fetchData();
 },[])
@@ -24,22 +27,17 @@ fetchData();
     </tr>   
     </thead>
     <tbody>
-        <tr>
-        <th  scope="row">Zaza</th>
-        <td>Masr el gedida</td>
-        <td>$</td>
-        <td>star</td>
-        <td><button className="btn btn-warning">Edit</button></td>
-        <td><button className="btn btn-danger">Delete</button></td>
-        </tr>
-        <tr>
-        <th  scope="row">Abo Sala7</th>
-        <td>Masr el gedida</td>
-        <td>$</td>
-        <td>star</td>
-        <td><button className="btn btn-warning">Edit</button></td>
-        <td><button className="btn btn-danger">Delete</button></td>
-        </tr>
+      {restaurants && restaurants.map(elem => {
+          return (
+          <tr key={elem.id}>
+              <td>{elem.name}</td>
+              <td>{elem.location}</td>
+              <td>{"$".repeat(elem.price_range)}</td>
+              <td>Reviews</td>
+              <td><button className="btn btn-warning">Edit</button></td>
+              <td><button className="btn btn-danger">Delete</button></td>
+          </tr>);
+      })} 
     </tbody>
     </table>
         </div>
