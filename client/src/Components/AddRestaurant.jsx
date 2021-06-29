@@ -22,7 +22,7 @@ console.log(response);
     }
   }
   return (
-    <div className="container mb-4">
+    <div className="container mb-4 bg">
       <form action="">
         <div className="row center">
           <div className="col">
