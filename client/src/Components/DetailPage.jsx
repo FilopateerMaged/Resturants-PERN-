@@ -17,9 +17,23 @@ const [Name, setName] = useState('')
       }, []);
    
     return (
+        <>
         <div className="container">
          <h1 className=""> {Name}'s Reviews </h1>
-        </div>
+         </div>
+
+
+<div class="card text-white bg-primary">
+  <div class="card-header">
+    {Name}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Review</h5>
+    <p class="card-text">Ya3.</p>
+  </div>
+  </div>
+</>
+ 
     )
 }
 
