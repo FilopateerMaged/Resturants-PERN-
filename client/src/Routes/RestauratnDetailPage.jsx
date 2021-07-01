@@ -1,9 +1,10 @@
 import React from 'react'
+import DetailPage from '../Components/DetailPage'
 
 const RestauratnDetailPage = () => {
     return (
         <div>
-            Restaurant
+            <DetailPage/>
         </div>
     )
 }

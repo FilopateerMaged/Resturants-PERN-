@@ -6,6 +6,10 @@ import {useHistory} from "react-router-dom";
 const RestaurantList = (props) => {
     let history = useHistory()
     const {restaurants,setRestaurants} = useContext(RestaurantsContext)
+
+    const handleDetail = (id,name) => {
+        history.push(`/restaurants/${id}`)
+    }
    
     const handlePress = (id) => {
         history.push(`/restaurants/${id}/update`)
@@ -48,8 +52,8 @@ fetchData();
     <tbody>
       {restaurants && restaurants.map(elem => {
           return (
-          <tr key={elem.id}>
-              <td>{elem.name}</td>
+          <tr role="button" key={elem.id}>
+              <td onClick={()=> handleDetail(elem.id)}>{elem.name}</td>
               <td>{elem.location}</td>
               <td>{"$".repeat(elem.price_range)}</td>
               <td>Reviews</td>
