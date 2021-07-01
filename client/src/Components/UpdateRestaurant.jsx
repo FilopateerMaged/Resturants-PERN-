@@ -9,21 +9,21 @@ const UpdateRestaurant = (props) => {
   const [Name, setName] = useState("");
   const [Location, setLocation] = useState("");
   const [PriceRange, setPriceRange] = useState("");
- 
-const handleSubmit = async(e) => {
-   e.preventDefault()
-try {
-  const updateRest = await RestaurantAPI.put(`/${id}`,{
-    name:Name,
-    location: Location,
-    price_range: PriceRange
-  })
-   history.push('/')
-} catch (error) {
-  console.log(error)
-}
- }
- 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const updateRest = await RestaurantAPI.put(`/${id}`, {
+        name: Name,
+        location: Location,
+        price_range: PriceRange,
+      });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await RestaurantAPI.get(`/${id}`);
@@ -32,10 +32,7 @@ try {
       setLocation(response.data.data.restaurant[0].location);
       setPriceRange(response.data.data.restaurant[0].price_range);
     };
- 
- 
- 
- 
+
     fetchData();
   }, []);
 
@@ -84,7 +81,9 @@ try {
             <option value="5">$$$$$</option>
           </select>
           <div className="">
-            <button onClick={handleSubmit} className="btn btn-primary col ">Submit</button>
+            <button onClick={handleSubmit} className="btn btn-primary col ">
+              Submit
+            </button>
           </div>
         </form>
       </div>

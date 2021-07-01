@@ -9,6 +9,7 @@ const addRestaurants = (restaurant) => {
 }
 
 
+
 return(
     <RestaurantsContext.Provider value={{restaurants,setRestaurants,addRestaurants}}>
 
