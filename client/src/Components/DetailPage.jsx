@@ -1,16 +1,20 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState,useContext } from 'react'
 import { useParams } from 'react-router'
 import RestaurantAPI from '../Api/RestaurantAPI'
+import { RestaurantsContext } from '../Context/RestaurantsContext'
+import Card from './Card'
 
 const DetailPage = () => {
     const {id} = useParams();
+    const {selectedRes,setSelectedRes} = useContext(RestaurantsContext);
 
-const [Name, setName] = useState('')
+const [Name, setName] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
           const response = await RestaurantAPI.get(`/${id}`);
            setName(response.data.data.restaurant[0].name) ;
+           setSelectedRes(response.data.data.restaurant[0])
         };
     
         fetchData();
@@ -19,19 +23,12 @@ const [Name, setName] = useState('')
     return (
         <>
         <div className="container">
-         <h1 className=""> {Name}'s Reviews </h1>
+         <h1 className=""> {selectedRes.name}'s Reviews </h1>
+        <Card/>
          </div>
 
 
-<div class="card text-white bg-primary">
-  <div class="card-header">
-    {Name}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Review</h5>
-    <p class="card-text">Ya3.</p>
-  </div>
-  </div>
+
 </>
  
     )

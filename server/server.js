@@ -84,7 +84,37 @@ app.delete("/api/v1/restaurants/:resataurantsid", async (req,res) => {
     
 });
 
+app.post("/api/v1/restaurants/reviews/:restauratnsid", async (req,res) => {
+    try {
+        const result = await db.query("insert into reviews (restaurant_id, name, review, rating) values ($1, $2, $3, $4)", [req.params.restauratnsid,req.body.name,req.body.review,req.body.rating] )
+        res.status(204).json({
+            status: "review added"
+        })
+        console.log(result)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// get review
+app.get("/api/v1/restaurants/reviews/:restauratnsid",async (req,res) => {
+   try {
+    const result = await db.query("select * from reviews where restaurant_id = $1",[req.params.restauratnsid])
+    res.status(200).json({
+        status:"yay",
+        data:{
+            reviews:result.rows
+        }})
+   } catch (error) {
+       console.log(error)
+   }
+    })
+
+
 const port = process.env.port || 4001;
 app.listen(port, () => {
     console.log(`app is running on ${port}`);
 });
+
+// add a review w
+
